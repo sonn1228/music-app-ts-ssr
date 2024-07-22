@@ -24,7 +24,7 @@ block main
               span(class="inner-number mr-1") #{song.like}
               | thích
             div(
-              class=`inner-action inner-heart ${song.favorite ? "active" : ""}`
+              class=`inner-action inner-heart ${song.isFavoriteSong ? "active" : ""}`
               button-favorite=song.id
             )
               <i class="fa-regular fa-heart"></i> Bài hát yêu thích
@@ -38,9 +38,6 @@ block main
                 data-song=song
                 data-singer=singer
               )
-              //- audio(controls)
-              //-   source(src="https://backend.daca.vn/assets/audios/cat-doi-noi-sau.mp3")
-
           .inner-desc
             .inner-label Mô tả
             .inner-text

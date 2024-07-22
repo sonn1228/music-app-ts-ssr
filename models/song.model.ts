@@ -15,6 +15,7 @@ interface ISong extends mongoose.Document {
   deleted: boolean;
   deletedAt?: Date;
   infoSinger?: any;
+  isFavoriteSong?: any;
 }
 
 const songSchema = new mongoose.Schema<ISong>(

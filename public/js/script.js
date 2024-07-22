@@ -66,41 +66,29 @@ if (buttonLike) {
           buttonLike.classList.toggle('active');
         }
       })
-
-    // fetch(`/songs/like/${status}/${id}`, {
-    //   method: "PATCH"
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     if (data.code == 200) {
-    //       const elementNumber = buttonLike.querySelector(".inner-number");
-    //       elementNumber.innerHTML = data.like;
-    //       buttonLike.classList.toggle("active");
-    //     }
-    //   })
   })
 }
 // End Button Like
 
 // Button Favorite
-const listButtonFavorite = document.querySelectorAll("[button-favorite]");
-if (listButtonFavorite.length > 0) {
-  listButtonFavorite.forEach(buttonFavorite => {
-    buttonFavorite.addEventListener("click", () => {
-      const id = buttonFavorite.getAttribute("button-favorite");
+const buttonFavorite = document.querySelector("[button-favorite]");
+if (buttonFavorite) {
+  buttonFavorite.addEventListener("click", () => {
+    const id = buttonFavorite.getAttribute("button-favorite");
+    const status = buttonFavorite.classList.contains("active") ? "unfavorite" : "favorite";
 
-      const status = buttonFavorite.classList.contains("active") ? "unfavorite" : "favorite";
-
-      fetch(`/songs/favorite/${status}/${id}`, {
-        method: "PATCH"
+    const link = `/songs/favorite/${status}/${id}`;
+    const option = {
+      method: 'PATCH'
+    }
+    fetch(link, option)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.code == 200) {
+          buttonFavorite.classList.toggle("active");
+        }
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.code == 200) {
-            buttonFavorite.classList.toggle("active");
-          }
-        })
-    })
   })
 }
 // End Button Favorite

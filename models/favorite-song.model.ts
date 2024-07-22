@@ -1,6 +1,17 @@
 import mongoose from "mongoose";
 
-const favoriteSongSchema = new mongoose.Schema(
+interface IFavoriteSong extends mongoose.Document {
+  userId: String;
+  songId: String;
+  deleted: {
+    type: Boolean;
+    default: false;
+  };
+  deletedAt: Date;
+  song: any;
+  singer: any;
+}
+const favoriteSongSchema = new mongoose.Schema<IFavoriteSong>(
   {
     userId: String,
     songId: String,
@@ -15,7 +26,7 @@ const favoriteSongSchema = new mongoose.Schema(
   }
 );
 
-const FavoriteSong = mongoose.model(
+const FavoriteSong = mongoose.model<IFavoriteSong>(
   "FavoriteSong",
   favoriteSongSchema,
   "favorite-songs"

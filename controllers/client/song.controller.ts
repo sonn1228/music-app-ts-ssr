@@ -123,7 +123,7 @@ export const like = async (req: Request, res: Response) => {
 };
 
 // [GET] /songs/favorite/:typeFavorite/:idSong
-export const favorite = async (req: Request, res: Response) => {
+export const favoritePatch = async (req: Request, res: Response) => {
   const idSong: string = req.params.idSong;
   const typeFavorite: string = req.params.typeFavorite;
   try {

@@ -1,13 +1,12 @@
-import { Express, Request, Response } from "express";
-import { topicsRoutes } from "./topic.route";
+import { Express } from "express";
 import { homeRoutes } from "./home.route";
+import { songRoutes } from "./song.route";
+import { topicsRoutes } from "./topic.route";
 
 const clientRoutes = (app: Express): void => {
   app.use("/", homeRoutes);
   app.use("/topics", topicsRoutes);
-  app.get("/*", (req: Request, res: Response) => {
-    res.redirect("/");
-  });
+  app.use("/songs", songRoutes);
 };
 
 export default clientRoutes;

@@ -1,4 +1,3 @@
-console.log('client js')
 // APlayer
 const aplayer = document.querySelector("#aplayer");
 if (aplayer) {
@@ -48,21 +47,37 @@ if (aplayer) {
 const buttonLike = document.querySelector("[button-like]");
 if (buttonLike) {
   buttonLike.addEventListener("click", () => {
-    const id = buttonLike.getAttribute("button-like");
+    const idSong = buttonLike.getAttribute("button-like");
+    const isActive = buttonLike.classList.contains('active');
+    const typeLike = isActive ? 'dislike' : 'like';
 
-    const status = buttonLike.classList.contains("active") ? "dislike" : "like";
+    const link = `/songs/like/${typeLike}/${idSong}`
 
-    fetch(`/songs/like/${status}/${id}`, {
+    const option = {
       method: "PATCH"
-    })
+    }
+    fetch(link, option)
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         if (data.code == 200) {
-          const elementNumber = buttonLike.querySelector(".inner-number");
-          elementNumber.innerHTML = data.like;
-          buttonLike.classList.toggle("active");
+          const elementNumber = buttonLike.querySelector('.inner-number');
+          elementNumber.innerHTML = data.like
+          buttonLike.classList.toggle('active');
         }
       })
+
+    // fetch(`/songs/like/${status}/${id}`, {
+    //   method: "PATCH"
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.code == 200) {
+    //       const elementNumber = buttonLike.querySelector(".inner-number");
+    //       elementNumber.innerHTML = data.like;
+    //       buttonLike.classList.toggle("active");
+    //     }
+    //   })
   })
 }
 // End Button Like

@@ -82,3 +82,37 @@ export const detail = async (req: Request, res: Response) => {
     });
   }
 };
+// [GET] /songs/like/:typeLike/:idSong
+
+export const like = async (req: Request, res: Response) => {
+  const idSong: string = req.params.idSong;
+  const typeLike: string = req.params.typeLike;
+  const song = await Song.findOne({
+    _id: idSong,
+    status: "active",
+    deleted: false,
+  });
+  if (song) {
+    let newLike: number = song.like;
+    newLike = typeLike == "like" ? newLike + 1 : newLike - 1;
+    await Song.updateOne(
+      {
+        _id: idSong,
+      },
+      {
+        like: newLike,
+      }
+    );
+
+    res.json({
+      code: 200,
+      message: "Success",
+      like: newLike,
+    });
+    return;
+  }
+  res.json({
+    code: 400,
+    message: "error",
+  });
+};

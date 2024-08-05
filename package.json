@@ -16,6 +16,7 @@
     "mongoose": "^8.5.1",
     "mongoose-slug-updater": "^3.3.0",
     "pug": "^3.0.3",
+    "tinymce": "^7.2.1",
     "unidecode": "^1.1.0"
   },
   "devDependencies": {

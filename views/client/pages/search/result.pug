@@ -8,17 +8,19 @@ block main
         +box-head(pageTitle)
 
     .row
-      each item in songs
-        .col-6.mb-3
-          div(class="song-item")
-            div(class="inner-image")
-              a(href=`/songs/detail/${item.slug}`)
-                img(src=item.avatar)
-            div(class="inner-content")
-              div(class="inner-title")
-                a(href=`/songs/detail/${item.slug}`) #{item.title}
-              div(class="inner-singer")
-                <i class="fa-solid fa-microphone-lines"></i> #{item.singer.fullName}
-              div(class="inner-like")
-                <i class="fa-solid fa-thumbs-up"></i> #{item.like}
-              div(class="inner-time") <i class="fa-regular fa-clock"></i> Hôm nay
+      if(songs)
+        if(songs.length > 0)
+          each item in songs
+            .col-6.mb-3
+              div(class="song-item")
+                div(class="inner-image")
+                  a(href=`/songs/detail/${item.slug}`)
+                    img(src=item.avatar)
+                div(class="inner-content")
+                  div(class="inner-title")
+                    a(href=`/songs/detail/${item.slug}`) #{item.title}
+                  div(class="inner-singer")
+                    <i class="fa-solid fa-microphone-lines"></i> #{item.infoSinger.fullName}
+                  div(class="inner-like")
+                    <i class="fa-solid fa-thumbs-up"></i> #{item.like}
+                  div(class="inner-time") <i class="fa-regular fa-clock"></i> Hôm nay

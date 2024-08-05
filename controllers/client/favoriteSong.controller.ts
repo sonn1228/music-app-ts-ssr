@@ -10,15 +10,15 @@ export const index = async (req: Request, res: Response) => {
   });
   for (const item of favoriteSongs) {
     const song = await Song.findOne({
-      _id: item.songId,
+      _id: item["songId"],
     });
     if (song) {
       const singer = await Singer.findOne({
-        _id: song.singerId,
+        _id: song["singerId"],
       });
       item["singer"] = singer;
     }
-    item["song"] = song;
+    item.song = song;
   }
   res.render("client/pages/songs/favorite.pug", {
     pageTitle: "Favorite songs",

@@ -163,3 +163,36 @@ export const favoritePatch = async (req: Request, res: Response) => {
     });
   }
 };
+// [GET] /songs/listen/:idSong
+export const listen = async (req: Request, res: Response) => {
+  const id: string = req.params.songId;
+  const song = await Song.findOne({
+    _id: id,
+    deleted: false,
+  });
+
+  if (song) {
+    try {
+      const listen = song.listen + 1;
+      await Song.updateOne(
+        {
+          _id: id,
+        },
+        {
+          listen: listen,
+        }
+      );
+
+      res.json({
+        code: 200,
+        listen: listen,
+        message: "Success",
+      });
+    } catch (error) {
+      res.json({
+        code: 400,
+        message: "Error",
+      });
+    }
+  }
+};

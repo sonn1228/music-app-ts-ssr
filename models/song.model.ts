@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-interface ISong extends mongoose.Document {
+interface ISong extends Document {
   title: string;
   avatar: string;
   description: string;
@@ -18,23 +18,48 @@ interface ISong extends mongoose.Document {
   isFavoriteSong?: any;
 }
 
-const songSchema = new mongoose.Schema<ISong>(
+const songSchema = new Schema<ISong>(
   {
-    title: String,
-    avatar: String,
-    description: String,
-    singerId: String,
-    topicId: String,
+    title: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    singerId: {
+      type: String,
+      required: true,
+    },
+    topicId: {
+      type: String,
+      required: true,
+    },
     like: {
       type: Number,
       default: 0,
     },
-    lyrics: String,
-    audio: String,
-    status: String,
+    lyrics: {
+      type: String,
+      required: true,
+    },
+    audio: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
     slug: {
       type: String,
       unique: true,
+      required: true,
     },
     listen: {
       type: Number,
